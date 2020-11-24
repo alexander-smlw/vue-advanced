@@ -21,13 +21,16 @@ const store = new Vuex.Store({
 });
 
 addErrorHandler(response => {
-	let text = 'Ошибка ответа от сервера';
-
+  let text = 'Ошибка ответа от сервера';
+  
 	if('vueAlert' in response.config){
 		text += ` ${response.config.vueAlert}`;
-	}
-
-	store.dispatch('alerts/add', { type: 'error', text });
+  }
+  
+  const closable = response.config.vueErrorType !== 'critical'
+  const timeout = closable ? 7000 : null
+  
+	store.dispatch('alerts/add', { type: 'error', text, timeout, closable});
 	return { res: false };
 });
 

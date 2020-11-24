@@ -11,7 +11,8 @@
 						<div>In Cart: {{ cartCount }}</div>
 						<div>Total: {{ cartTotal }}</div>
 					</div>
-					{{ alerts }}
+
+					<alerts />
 				</div>
 				<hr>
 				<nav class="navbar navbar-expand p-0">
@@ -49,6 +50,7 @@
 
 <script>
 	import { mapGetters } from 'vuex';
+	import Alerts from '@/components/Alerts'
 
 	export default {
 		data(){
@@ -61,8 +63,8 @@
 				]
 			}
 		},
+		components: { Alerts },
 		computed: {
-			...mapGetters('alerts', {alerts: 'all'}),
 			...mapGetters('cart', {cartCount: 'totalCnt', cartTotal: 'totalSum'})
 		}
 	}
